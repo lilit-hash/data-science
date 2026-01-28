@@ -1,0 +1,79 @@
+[project]
+name = "movielens-analytics"
+version = "0.1.0"
+description = "This rush will help you to strengthen the skills acquired in the previous days"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "babel>=2.17.0",
+    "jupyter>=1.1.1",
+    "requests>=2.32.5",
+]
+
+[dependency-groups]
+dev = [
+    "pylint>=4.0.2",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.3",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.4,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP", "T20"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["movielens_analytics"]
+
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+[tool.pylint.MAIN]
+ignore-paths = ["src/.ipynb_checkpoints"]
+
+[tool.pylint.DESIGN]
+max-returns = 1
+
+[tool.pylint.EXCEPTIONS]
+overgeneral-exceptions = ["builtins.BaseException", "builtins.Exception"]
+
+[tool.pylint.FORMAT]
+indent-after-paren = 4
+indent-string = "    "
+max-line-length = 100
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "missing-module-docstring",
+    "fixme",
+    "too-few-public-methods",
+    "duplicate-code", # !NOTE: Remove on future
+]
+
+[tool.pylint.MISCELLANEOUS]
+check-fixme-in-docstring = false
+notes = ["FIXME", "XXX", "TODO"]
+notes-rgx = ""
+
+[tool.pylint.SPELLING]
+spelling-ignore-comment-directives = "fmt: on,fmt: off,noqa:,noqa,nosec,isort:skip,mypy:"
